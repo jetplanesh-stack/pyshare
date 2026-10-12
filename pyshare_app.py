@@ -1,11 +1,13 @@
 import streamlit as st
 import json
 import os
+import re
 from datetime import datetime
 import sys
 from io import StringIO
 import subprocess
 import tempfile
+from ai_helper import ask_ai
 
 st.set_page_config(page_title="PyShare", layout="wide", initial_sidebar_state="collapsed")
 
@@ -397,6 +399,9 @@ if "current_user" not in st.session_state:
 if "coding_mode" not in st.session_state:
     st.session_state.coding_mode = None
 
+if "code_history" not in st.session_state:
+    st.session_state.code_history = []
+
 if st.session_state.current_user is None:
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -468,7 +473,7 @@ else:
                 st.session_state.coding_mode = None
                 st.rerun()
 
-        tab1, tab2, tab3, tab4 = st.tabs(["🏠 피드", "📸 프로필", "🔍 탐색", "💻 터미널"])
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏠 피드", "📸 프로필", "🔍 탐색", "💻 터미널", "🤖 AI도우미"])
 
         with tab1:
             st.markdown("## ✨ 새 포스트 작성", unsafe_allow_html=True)
@@ -770,6 +775,11 @@ else:
 
                             # 복사 버튼
                             if st.button("📋 코드 복사", use_container_width=True, key=f"copy_{post['id']}"):
+                                st.write(f"""
+                                <script>
+                                navigator.clipboard.writeText({json.dumps(post["code"])});
+                                </script>
+                                """, unsafe_allow_html=True)
                                 st.toast(f"✅ 복사됨: {post['author']}'s code")
 
                         with col2:
@@ -850,3 +860,34 @@ else:
                         st.info("표준 라이브러리만 사용됩니다. 추가 설치가 필요하지 않습니다.")
                 else:
                     st.error("코드를 입력해주세요")
+
+        with tab5:
+            st.markdown("## 🤖 AI 도우미", unsafe_allow_html=True)
+            st.markdown("<div class='tab-divider'></div>", unsafe_allow_html=True)
+
+            st.markdown("**AI에게 코드 작성을 요청하세요**")
+            ai_prompt = st.text_area("", placeholder="예: 리스트를 정렬하는 파이썬 함수 만들어줘", height=100, label_visibility="collapsed")
+
+            if st.button("🚀 코드 생성", use_container_width=True):
+                if ai_prompt.strip():
+                    with st.spinner("AI가 코드를 작성중입니다..."):
+                        code = ask_ai(ai_prompt)
+                        st.session_state.code_history.append(code)
+                        st.code(code, language="python")
+                        st.success("✅ 코드가 생성되었습니다!")
+                else:
+                    st.error("요청을 입력해주세요")
+
+            st.markdown("<div class='tab-divider'></div>", unsafe_allow_html=True)
+
+            if st.session_state.code_history:
+                st.markdown("**이전 코드 버전**")
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    selected_idx = st.selectbox("", range(len(st.session_state.code_history)), format_func=lambda i: f"버전 {len(st.session_state.code_history) - i}")
+                with col2:
+                    if st.button("롤백"):
+                        st.session_state.code_history = st.session_state.code_history[:selected_idx+1]
+                        st.rerun()
+
+                st.code(st.session_state.code_history[selected_idx], language="python")

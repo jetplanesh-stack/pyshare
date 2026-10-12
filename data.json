@@ -1,0 +1,86 @@
+{
+  "users": {
+    "방승현": {
+      "followers": [],
+      "following": [],
+      "nickname": "방승현",
+      "created_at": "2026-10-07T20:15:01.758514"
+    },
+    "bsh": {
+      "followers": [],
+      "following": [],
+      "nickname": "bsh",
+      "created_at": "2026-10-07T20:20:58.828220"
+    },
+    "bs": {
+      "followers": [],
+      "following": [],
+      "nickname": "bs",
+      "created_at": "2026-10-07T21:02:38.678370"
+    }
+  },
+  "posts": [
+    {
+      "id": "bsh_0_1791374314.43454",
+      "author": "bsh",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [
+        "bsh"
+      ],
+      "created_at": "2026-10-07T20:58:34.434552"
+    },
+    {
+      "id": "bsh_1_1791374315.880984",
+      "author": "bsh",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [
+        "bsh"
+      ],
+      "created_at": "2026-10-07T20:58:35.880995"
+    },
+    {
+      "id": "bsh_2_1791374318.478835",
+      "author": "bsh",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [
+        "bsh"
+      ],
+      "created_at": "2026-10-07T20:58:38.478845"
+    },
+    {
+      "id": "bsh_3_1791374319.218191",
+      "author": "bsh",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [
+        "bsh"
+      ],
+      "created_at": "2026-10-07T20:58:39.218202"
+    },
+    {
+      "id": "bs_4_1791374564.70697",
+      "author": "bs",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [],
+      "created_at": "2026-10-07T21:02:44.706981"
+    },
+    {
+      "id": "bs_5_1791374566.2594",
+      "author": "bs",
+      "code": "import os\nfrom dotenv import load_dotenv\nfrom anthropic import Anthropic \n\nload_dotenv()\n\nclient = Anthropic(\n    base_url=os.getenv(\"ANTHROPIC_BASE_URL\"),\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)\n\ndef ask_ai(prompt):\n    res = client.messages.create(\n        model=\"claude-haiku\",\n        max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n    )\n    return res.content[0].text",
+      "type": "python",
+      "description": "",
+      "likes": [],
+      "created_at": "2026-10-07T21:02:46.259414"
+    }
+  ]
+}
